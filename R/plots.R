@@ -11,10 +11,6 @@ lsq_cumulative_plot <- function(object ) {
   breaks    <- c(u,round((u-v) / 4,2),v)
   breakPos  <- 1 / breaks - 1 / u
   breakLab  <- paste("1/", breaks,sep="")
-  labR2_mu  <- paste0( "atop( R^{2}==", sprintf( "%0.3f", object$rsq$metric ),
-                       ", mu/beta == ", sprintf("%0.3f", object$mu ), ")" )
-  xposR2_mu <- 1 / (u - 0.2)
-  yposR2_mu <- 0.9 * max( object$cumulativefrequency$M_f )
 
   # Create the plot:
   p <- ggplot( object$cumulativefrequency, aes( x=inv_f ) ) +
@@ -28,7 +24,6 @@ lsq_cumulative_plot <- function(object ) {
         ggtitle("Linear model best fit") +
         scale_x_continuous( trans=identity_trans(), breaks=breakPos,
                             labels=breakLab  ) +
-        annotate( "text", x=xposR2_mu, y=yposR2_mu, label=labR2_mu, parse=TRUE, hjust=1 ) +
         theme_bw()
 
 
@@ -71,7 +66,6 @@ norm_cumulative_plot <- function(object){
     ggtitle("Normalized cumulative distribution" ) +
     scale_x_continuous( trans=identity_trans(), breaks=breakPos,
                         labels=breakLab  ) +
-    annotate( "text", x=xpos_metric, y=ypos_metric, label=lab_metric, hjust=1 ) +
     theme(legend.title=element_blank())
 
   return(p)
