@@ -1,58 +1,70 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "NeutralityTest.R: Testing a neutral evolutionary model on cancer sequencing data "
+author: "Marc Williams"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+#output: rmarkdown::html_vignette
+output: pdf_document
+fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+## Load package
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+To load the package content run the script "TestingNeutrality.R". This will load all functions and some testdata files.
 
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r,message = FALSE}
+setwd("/Users/marcwilliams/Google Drive/early_events/testingneutrality/")
+source("R/TestingNeutrality.R")
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+The test data files include 2 simulated VAF distributions, one under a neutral evolutionary model and one with a non neutral evolutionary model. The test data are vectors of variant allele frequency, and are names VAFselection and VAFneutral. First of all we print the first few elements of one of these vectors.
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r}
+head(VAFselection)
 ```
 
-Also a quote using `>`:
+## neutralitytest object
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+The most useful function in the TestingNeutrality.R package is `neutralitytest` which creates a `neutralitytest` object. The `neutralitytest` object contains a range of metrics to test for neutrality, and makes plotting histograms and cumulative distributions to visualize the output easy. The neutralitytest function needs a vector of VAFs and an upper and lower limit for the frequency range over which we wish to test whether the data is consistent with a neutral model.
+
+```{r}
+s <- neutralitytest(VAFselection,fmin = 0.05, fmax = 0.4)
+```
+We can the print a summary of the neutralitytest object for the synthetic data with selection.
+
+```{r}
+summary(s)
+```
+And we can do the same for the neutral synthetic data.
+```{r}
+n <- neutralitytest(VAFneutral,fmin = 0.05, fmax = 0.4)
+summary(n)
+```
+
+## Plotting
+
+The `neutralitytest` object makes plotting simple. First of all we can plot a histogram of the VAFs.
+
+```{r, fig.show='hold',fig.width = 5,warning = FALSE}
+vaf_histogram(s)
+```
+
+We can also plot the cumulative distribution along with the least squares best fit line.
+
+```{r, fig.show='hold',fig.width = 6,warning = FALSE}
+lsq_cumulative_plot(s)
+```
+
+And finally the normalized cumulative distribution, which is used to calculate the kolmogorov distance and the area metrics.
+```{r, fig.show='hold',fig.width = 6,warning = FALSE}
+norm_cumulative_plot(s)
+```
+
+Invoking the plot command will plot all 3 plots together.
+```{r, fig.show='hold',fig.width = 8, fig.height = 8, warning = FALSE}
+plot(n)
+```
+
