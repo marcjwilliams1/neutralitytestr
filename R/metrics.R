@@ -1,16 +1,6 @@
-kolmogorovdist <- function(dfVAF, fmin = 0.12, fmax = 0.24){
+kolmogorovdist <- function(cumulativefrequency, fmin = 0.12, fmax = 0.24){
 
-  names(dfVAF) <- "VAF"
-
-  dfVAF <- filter(dfVAF,VAF > fmin, VAF < fmax)
-
-  n = length(dfVAF$VAF)
-
-  cdfs <- 1 - theoreticalcurve(sort(dfVAF$VAF),fmin , fmax)
-
-  dp <- max((1:n) / n - cdfs)
-  dn <- - min((0:(n-1)) / n - cdfs)
-  d <- max(c(dn, dp))
+  d <- max(abs(cumulativefrequency$tM_f - cumulativefrequency$nM_f))
 
   return(data.frame(metric = d, pval = metricp$pval[findInterval(d,metricp$Dkmetric)]))
 }
