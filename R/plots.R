@@ -1,42 +1,34 @@
-lsq_cumulative_plot2 <- function( object ) {
-  
+lsq_cumulative_plot <- function(object ) {
+
   # Set values for u and v based on the input data:
   u <- max( object$cumulativefrequency$f )
   v <- min( object$cumulativefrequency$f )
-  
+
+  # Return nothing if less than 5 sample points
   if( nrow( object$cumulativefrequency ) < 5 ) return(NULL)
-  
+
   # Get good positions for breaks and set label variables:
   breaks    <- c(u,round((u-v) / 4,2),v)
   breakPos  <- 1 / breaks - 1 / u
   breakLab  <- paste("1/", breaks,sep="")
-  
+
   # Create the plot:
   p <- ggplot( object$cumulativefrequency, aes( x=inv_f ) ) +
-    geom_abline( aes(slope=object$mu, intercept=0, color="1"), linetype=1,size=1 ) +
-    geom_point(aes(y=M_f,colour="2")) +
-    scale_colour_manual(values = c("firebrick","black"),
+        geom_abline( aes(slope=object$mu, intercept=0, color="1"), linetype=1,size=1 ) +
+        geom_point(aes(y=M_f,colour="2")) +
+        scale_colour_manual(values = c("firebrick","black"),
                         labels = c("Best fit line", "Data"),
                         name = "") +
-    xlab( "Inverse allelic frequency 1/f" ) +
-    ylab( "Cumulative number of mutations M(f)" ) +
-    ggtitle("Linear model best fit") +
-    scale_x_continuous( trans=identity_trans(), breaks=breakPos,
-                        labels=breakLab  ) +
-    theme_bw() +
-    theme(text = element_text(size=30),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.border = element_blank(),
-          panel.background = element_blank()) +
-    theme(axis.line.x = element_line(color="black", size = 1),
-          axis.line.y = element_line(color="black", size = 1)) + 
-    theme(legend.title = element_blank())
-  
-  
-  
+        xlab( "Inverse allelic frequency 1/f" ) +
+        ylab( "Cumulative number of mutations M(f)" ) +
+        ggtitle("Linear model best fit") +
+        scale_x_continuous( trans=identity_trans(), breaks=breakPos,
+                            labels=breakLab  ) +
+        theme_bw()
+
+
+
   return(p)
-  
 }
 
 norm_cumulative_plot <- function(object){
@@ -64,6 +56,7 @@ norm_cumulative_plot <- function(object){
 
   p <- ggplot(df, aes(x = inv_f, y = M_f, col = data)) +
     geom_line(size = 2, alpha = 0.5) +
+    theme_bw() +
     xlab("Time")+
     ylab("Population size") +
     scale_colour_manual(values=c("dodgerblue","firebrick")) +
@@ -73,41 +66,20 @@ norm_cumulative_plot <- function(object){
     ggtitle("Normalized cumulative distribution" ) +
     scale_x_continuous( trans=identity_trans(), breaks=breakPos,
                         labels=breakLab  ) +
-    theme(legend.title=element_blank()) +
-    theme_bw() +
-    theme(text = element_text(size=30),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.border = element_blank(),
-          panel.background = element_blank()) +
-    theme(axis.line.x = element_line(color="black", size = 1),
-          axis.line.y = element_line(color="black", size = 1)) + 
-    theme(legend.title = element_blank())
-    
+    theme(legend.title=element_blank())
 
   return(p)
 
 }
 
-vaf_histogram <- function(object) {
-  
-  g <- ggplot(object$histogram, aes(x = VAF, y = freq)) +
-    geom_bar(stat="identity", width=0.01) +
-    xlab( "Allelic frequency f" ) +
-    ylab("Number of mutations") +
-    theme_bw() +
-    theme(text = element_text(size=30),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.border = element_blank(),
-          panel.background = element_blank()) +
-    theme(axis.line.x = element_line(color="black", size = 1),
-          axis.line.y = element_line(color="black", size = 1)) + 
-    theme(legend.title = element_blank()) +
-    ggtitle("Variant allele frequency histogram")
-  
-  return(g)
-  
-  
-}
+vaf_histogram <- function(object){
+  p <- ggplot( data.frame(x=object$VAF), aes(x=x) ) +
+          geom_histogram(binwidth=0.01) +
+          xlab( "Allelic frequency f" ) +
+          ylab("Number of mutations") +
+          xlim( -0.01, 1.01) +
+          ggtitle("Variant allele frequency histogram") +
+          theme_bw()
 
+  return(p)
+  }
