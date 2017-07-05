@@ -13,15 +13,9 @@ vignette: >
 
 ## Load package
 
-To load the package content run the script `neutralitytestr.R`. This will load all functions and some testdata files. Make sure that you have installed the following required packages: `pracma`, `ggplot2`, `ggpmisc`,`scales`, `cowplot` and `dplyr`. First of all set the directory to the package directory.
-
-```{r, echo = FALSE,  warning = FALSE}
-packagedir<-"/Users/marcwilliams/Google Drive/R-packages/neutralitytestr/"
-```
+After you have installed the package with ```devtools::install_github("marcjwilliams1/neutralitytestr")```, you can load the package via the normal command. This will also load some test data. 
 
 ```{r,message = FALSE,  warning = FALSE}
-setwd(packagedir)
-source("R/neutralitytestr.R")
 library(neutralitytestr)
 ```
 
@@ -33,7 +27,7 @@ head(VAFselection)
 
 ## `neutralitytest` object
 
-The basic functionality of the TestingNeutrality.R package is achieved by creating a `neutralitytest` object. The `neutralitytest` object contains a range of metrics to test for neutrality, and makes plotting histograms and cumulative distributions to visualize the output easy. The neutralitytest function takes a vector of VAFs and an upper and lower limit for the frequency range over which we wish to test whether the data is consistent with a neutral model, and then calculates all 4 metrics.
+The basic functionality of the ```neutralitytestr``` package is achieved by creating a `neutralitytest` object. The `neutralitytest` object contains a range of metrics to test for neutrality, and makes plotting histograms and cumulative distributions to visualize the output easy. The neutralitytest function takes a vector of VAFs and an upper and lower limit for the frequency range over which we wish to test whether the data is consistent with a neutral model, and then calculates all 4 metrics.
 
 ```{r}
 s <- neutralitytest(VAFselection, fmin = 0.05, fmax = 0.4)

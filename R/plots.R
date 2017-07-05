@@ -24,7 +24,7 @@ lsq_plot <- function(object ) {
     ggplot2::xlab( "Inverse allelic frequency 1/f" ) +
     ggplot2::ylab( "Cumulative number \nof mutations M(f)" ) +
     ggplot2::ggtitle("Linear model best fit") +
-    ggplot2::scale_x_continuous( trans=identity_trans(), breaks=breakPos,
+    ggplot2::scale_x_continuous( trans=scales::identity_trans(), breaks=breakPos,
                             labels=breakLab  ) +
     ggpmisc::stat_poly_eq(ggplot2::aes(label =  paste(..eq.label..)), 
                  formula = formula, parse = TRUE,
@@ -32,7 +32,8 @@ lsq_plot <- function(object ) {
     ggpmisc:: stat_poly_eq(formula = formula, 
                  parse = TRUE,
                  label.y.npc = 0.9, col = "Black") +
-    ggplot2::theme(legend.position = c(0.8, 0.15))
+    ggplot2::theme(legend.position = c(0.8, 0.15)) +
+    cowplot::theme_cowplot()
 
 
   return(p)
@@ -74,7 +75,8 @@ normalized_plot <- function(object){
     ggplot2::scale_x_continuous(trans=identity_trans(), 
                        breaks=breakPos,
                        labels=breakLab) +
-    ggplot2::theme(legend.position = c(0.8, 0.15))
+    ggplot2::theme(legend.position = c(0.8, 0.15))+
+    cowplot::theme_cowplot()
 
   return(p)
 
@@ -87,7 +89,8 @@ vaf_histogram <- function(object){
     ggplot2::xlab( "Allelic frequency f" ) +
     ggplot2::ylab("Number of \nmutations") +
     ggplot2::xlim( -0.01, 1.01) +
-    ggplot2::ggtitle("VAF histogram")
+    ggplot2::ggtitle("VAF histogram")+
+    cowplot::theme_cowplot()
 
   return(p)
 }
