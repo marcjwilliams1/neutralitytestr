@@ -1,3 +1,4 @@
+#' @export
 neutralitytest <- function(VAF, fmin = 0.12, fmax = 0.24) {
 
   cumulativefrequency <- analyse_vaf(VAF, fmin, fmax)
@@ -25,10 +26,12 @@ neutralitytest <- function(VAF, fmin = 0.12, fmax = 0.24) {
 
 }
 
+#' @export
 print.neutralitytest <- function(object){
   print("Neutrality test object")
 }
 
+#' @export
 summary.neutralitytest <- function(object){
   cat("Summary of neutrality metrics:","\n\n")
 

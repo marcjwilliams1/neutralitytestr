@@ -1,3 +1,4 @@
+#' @export
 lsq_plot <- function(object ) {
 
   # Set values for u and v based on the input data:
@@ -37,6 +38,7 @@ lsq_plot <- function(object ) {
   return(p)
 }
 
+#' @export
 normalized_plot <- function(object){
 
   # Set values for u and v based on the input data:
@@ -78,6 +80,7 @@ normalized_plot <- function(object){
 
 }
 
+#' @export
 vaf_histogram <- function(object){
   p <- ggplot( data.frame(x=object$VAF), aes(x=x) ) +
           geom_histogram(binwidth=0.01) +
@@ -89,7 +92,7 @@ vaf_histogram <- function(object){
   return(p)
 }
 
-
+#' @export
 plot_all <- function(object){
   
   p1 <- vaf_histogram(object)
