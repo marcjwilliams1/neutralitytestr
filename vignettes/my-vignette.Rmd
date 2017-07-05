@@ -22,6 +22,7 @@ packagedir<-"/Users/marcwilliams/Google Drive/R-packages/neutralitytestr/"
 ```{r,message = FALSE,  warning = FALSE}
 setwd(packagedir)
 source("R/neutralitytestr.R")
+library(neutralitytestr)
 ```
 
 The test data files include 2 simulated VAF distributions, one under a neutral evolutionary model and one with a non neutral evolutionary model. The test data are vectors of variant allele frequency, and are named VAFselection and VAFneutral. First of all we print the first few elements of one of these vectors.

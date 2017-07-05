@@ -2,7 +2,7 @@ kolmogorovdist <- function(dfVAF, fmin = 0.12, fmax = 0.24){
 
   names(dfVAF) <- "VAF"
 
-  dfVAF <- filter(dfVAF,VAF > fmin, VAF < fmax)
+  dfVAF <- dplyr::filter(dfVAF,VAF > fmin, VAF < fmax)
 
   n = length(dfVAF$VAF)
 
@@ -26,10 +26,10 @@ meandist <- function(cumulativefrequency) {
 areametric <- function(cumulativefrequency, fmin = 0.12, fmax = 0.24){
 
   # Calculate area of theoretical curve
-  theoryA <- trapz(cumulativefrequency$inv_f, cumulativefrequency$tM_f)
+  theoryA <- pracma::trapz(cumulativefrequency$inv_f, cumulativefrequency$tM_f)
 
   # Calculate area of emprical curve
-  dataA <- trapz(cumulativefrequency$inv_f, cumulativefrequency$nM_f)
+  dataA <- pracma::trapz(cumulativefrequency$inv_f, cumulativefrequency$nM_f)
 
   # Take absolute difference between the two
   A <- abs(theoryA - dataA)
