@@ -1,5 +1,5 @@
 ---
-title: "NeutralityTest.R: Testing a neutral evolutionary model on cancer sequencing data "
+title: "neutralitytestr.R: Testing a neutral evolutionary model on cancer sequencing data "
 author: "Marc Williams"
 date: "`r Sys.Date()`"
 #output: rmarkdown::html_vignette
@@ -62,9 +62,11 @@ And finally the normalized cumulative distribution, which is used to calculate t
 normalized_plot(n)
 ```
 
-Invoking the plot command will plot all 3 plots together, which can be saved to a named output.
+Invoking the plot command will plot all 3 plots together, which can be saved to a named output using ggplot.
 ```{r, warning = FALSE}
 gout <- plot_all(s)
+
+library(ggplot2)
 ggsave(filename = "test.pdf", gout, height = 5, width = 15)
 ```
 
