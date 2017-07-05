@@ -11,6 +11,7 @@ neutralitytest <- function(VAF, fmin = 0.12, fmax = 0.24) {
   fit <- lsqfit(cumulativefrequency, fmin, fmax)
 
   out <- list(mutation.rate = fit$mu,
+              model = fit,
               rsq = data.frame(metric = fit$rsq, pval = fit$pval),
               area = A,
               Dk = Dk,
@@ -37,18 +38,4 @@ summary.neutralitytest <- function(object){
   cat("R^2:\n ","value = ", object$rsq$metric, ", p-value = ", object$rsq$pval,"\n\n")
 
   cat("Effective mutation rate = ",object$mutation.rate)
-}
-
-plot.neutralitytest <- function(object){
-
-  p1 <- vaf_histogram(object)
-  p2 <- lsq_cumulative_plot(object)
-  p3 <- norm_cumulative_plot(object)
-
-  layout <- matrix(c(1, 1, 2, 3), nrow = 2, byrow = TRUE)
-
-  p <- multiplot(p1, p2, p3, layout = layout)
-
-  return(p)
-
 }

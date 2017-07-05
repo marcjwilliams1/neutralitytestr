@@ -1,4 +1,4 @@
-lsq_cumulative_plot <- function(object ) {
+lsq_plot <- function(object ) {
 
   # Set values for u and v based on the input data:
   u <- max( object$cumulativefrequency$f )
@@ -11,27 +11,33 @@ lsq_cumulative_plot <- function(object ) {
   breaks    <- c(u,round((u-v) / 4,2),v)
   breakPos  <- 1 / breaks - 1 / u
   breakLab  <- paste("1/", breaks,sep="")
-
+  
+  formula <- object$cumulativefrequency$M_f ~ object$cumulativefrequency$inv_f + 0 
   # Create the plot:
-  p <- ggplot( object$cumulativefrequency, aes( x=inv_f ) ) +
-        geom_abline( aes(slope=object$mu, intercept=0, color="1"), linetype=1,size=1 ) +
-        geom_point(aes(y=M_f,colour="2")) +
-        scale_colour_manual(values = c("firebrick","black"),
+  p <- ggplot( object$cumulativefrequency, aes( x=inv_f, y=M_f, col = "1") ) +
+    geom_smooth(method = "lm", formula = y ~ x + 0, se=FALSE)   + 
+    geom_point(aes(colour="2")) +
+    scale_colour_manual(values = c("firebrick","black"),
                         labels = c("Best fit line", "Data"),
                         name = "") +
-        xlab( "Inverse allelic frequency 1/f" ) +
-        ylab( "Cumulative number of mutations M(f)" ) +
-        ggtitle("Linear model best fit") +
-        scale_x_continuous( trans=identity_trans(), breaks=breakPos,
+    xlab( "Inverse allelic frequency 1/f" ) +
+    ylab( "Cumulative number \nof mutations M(f)" ) +
+    ggtitle("Linear model best fit") +
+    scale_x_continuous( trans=identity_trans(), breaks=breakPos,
                             labels=breakLab  ) +
-        theme_bw()
-
+    stat_poly_eq(aes(label =  paste(..eq.label..)), 
+                 formula = formula, parse = TRUE,
+                 label.y.npc = 0.8, col = "Black") +
+    stat_poly_eq(formula = formula, 
+                 parse = TRUE,
+                 label.y.npc = 0.9, col = "Black") +
+    theme(legend.position = c(0.8, 0.15))
 
 
   return(p)
 }
 
-norm_cumulative_plot <- function(object){
+normalized_plot <- function(object){
 
   # Set values for u and v based on the input data:
   u <- max( object$cumulativefrequency$f )
@@ -56,17 +62,17 @@ norm_cumulative_plot <- function(object){
 
   p <- ggplot(df, aes(x = inv_f, y = M_f, col = data)) +
     geom_line(size = 2, alpha = 0.5) +
-    theme_bw() +
     xlab("Time")+
     ylab("Population size") +
-    scale_colour_manual(values=c("dodgerblue","firebrick")) +
-    scale_fill_manual(values=c("dodgerblue","firebrick")) +
+    scale_colour_manual(values=c("firebrick","black"), name = "") +
+    scale_fill_manual(values=c("firebrick","black"), name = "") +
     xlab( "Inverse allelic frequency 1/f" ) +
     ylab( "Normalized M(f)" ) +
     ggtitle("Normalized cumulative distribution" ) +
-    scale_x_continuous( trans=identity_trans(), breaks=breakPos,
-                        labels=breakLab  ) +
-    theme(legend.title=element_blank())
+    scale_x_continuous(trans=identity_trans(), 
+                       breaks=breakPos,
+                       labels=breakLab) +
+    theme(legend.position = c(0.8, 0.15))
 
   return(p)
 
@@ -76,10 +82,24 @@ vaf_histogram <- function(object){
   p <- ggplot( data.frame(x=object$VAF), aes(x=x) ) +
           geom_histogram(binwidth=0.01) +
           xlab( "Allelic frequency f" ) +
-          ylab("Number of mutations") +
+          ylab("Number of \nmutations") +
           xlim( -0.01, 1.01) +
-          ggtitle("Variant allele frequency histogram") +
-          theme_bw()
+          ggtitle("VAF histogram")
 
   return(p)
-  }
+}
+
+
+plot_all <- function(object){
+  
+  p1 <- vaf_histogram(object)
+  p2 <- lsq_plot(object)
+  p3 <- normalized_plot(object)
+  
+  p <- plot_grid(p1, p2, p3,
+            labels = c("A", "B", "C"), ncol = 3)
+  
+  return(p)
+  
+}
+
