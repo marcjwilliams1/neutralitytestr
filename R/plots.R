@@ -72,7 +72,7 @@ normalized_plot <- function(object){
     ggplot2::xlab( "Inverse allelic frequency 1/f" ) +
     ggplot2::ylab( "Normalized M(f)" ) +
     ggplot2::ggtitle("Normalized cumulative distribution" ) +
-    ggplot2::scale_x_continuous(trans=identity_trans(), 
+    ggplot2::scale_x_continuous(trans=scales::identity_trans(), 
                        breaks=breakPos,
                        labels=breakLab) +
     ggplot2::theme(legend.position = c(0.8, 0.15))+
