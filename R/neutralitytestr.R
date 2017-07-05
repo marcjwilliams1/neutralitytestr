@@ -1,6 +1,6 @@
 package_dir <- "/Users/marcwilliams/Google Drive/R-packages/neutralitytestr/"
 
-load(paste(package_dir, "data/testdata.RData", sep = ""))
+#load(paste(package_dir, "data/testdata.RData", sep = ""))
 
 library(pracma)
 library(dplyr)
