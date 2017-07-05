@@ -15,9 +15,9 @@ lsq_plot <- function(object ) {
   
   formula <- object$cumulativefrequency$M_f ~ object$cumulativefrequency$inv_f + 0 
   # Create the plot:
-  p <- ggplot2::ggplot( object$cumulativefrequency, aes( x=inv_f, y=M_f, col = "1") ) +
+  p <- ggplot2::ggplot( object$cumulativefrequency, ggplot2::aes( x=inv_f, y=M_f, col = "1") ) +
     ggplot2::geom_smooth(method = "lm", formula = y ~ x + 0, se=FALSE)   + 
-    ggplot2::geom_point(aes(colour="2")) +
+    ggplot2::geom_point(ggplot2::aes(colour="2")) +
     ggplot2::scale_colour_manual(values = c("firebrick","black"),
                         labels = c("Best fit line", "Data"),
                         name = "") +
@@ -26,7 +26,7 @@ lsq_plot <- function(object ) {
     ggplot2::ggtitle("Linear model best fit") +
     ggplot2::scale_x_continuous( trans=identity_trans(), breaks=breakPos,
                             labels=breakLab  ) +
-    ggpmisc::stat_poly_eq(aes(label =  paste(..eq.label..)), 
+    ggpmisc::stat_poly_eq(ggplot2::aes(label =  paste(..eq.label..)), 
                  formula = formula, parse = TRUE,
                  label.y.npc = 0.8, col = "Black") +
     ggpmisc:: stat_poly_eq(formula = formula, 
@@ -62,7 +62,7 @@ normalized_plot <- function(object){
   xpos_metric<- 1 / (u - 0.1)
   ypos_metric <- 0.9 * max( df$M_f )
 
-  p <- ggplot2::ggplot(df, aes(x = inv_f, y = M_f, col = data)) +
+  p <- ggplot2::ggplot(df, ggplot2::aes(x = inv_f, y = M_f, col = data)) +
     ggplot2::geom_line(size = 2, alpha = 0.5) +
     ggplot2::xlab("Time")+
     ggplot2::ylab("Population size") +
@@ -82,7 +82,7 @@ normalized_plot <- function(object){
 
 #' @export
 vaf_histogram <- function(object){
-  p <- ggplot2::ggplot( data.frame(x=object$VAF), aes(x=x) ) +
+  p <- ggplot2::ggplot( data.frame(x=object$VAF), ggplot2::aes(x=x) ) +
     ggplot2::geom_histogram(binwidth=0.01) +
     ggplot2::xlab( "Allelic frequency f" ) +
     ggplot2::ylab("Number of \nmutations") +
