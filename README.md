@@ -36,6 +36,7 @@ R^2:
 Effective mutation rate =  33.84608
 ```
 
+
 The following commands will plot a VAF histogram, a least squares model fit and the normalized distributions. For more information see the vignette in ```vignettes/```.
 ```R
 vaf_histogram(out)
@@ -49,3 +50,8 @@ lsq_plot(out)
 normalized_plot(out)
 ```
 ![plot](/figure/unnamed-chunk-9-1.png)
+
+
+
+
+Note that the p-values should be interpreted with care and are meant to serve as an approximation to guide the interpretation of the test statistics. These p-values were generated empirically from a simulated cohort of cancers with known ground truth and are derived from the same data that generated the ROC curves in supplementary figure 3 from the paper. This cohort of simulated tumours were "sequenced" to 100X and thus if a sample you are analysing is sequenced to much higher or lower depth the p-values may no longer be valid. We have also developed a Bayesian alternative to identifying neutral and non-neutral tumours, this is available [here](https://github.com/marcjwilliams1/SubClonalSelection.jl). Note that this Bayesian method is much more computationally expensive and can take upwards of 10 hours per sample.
