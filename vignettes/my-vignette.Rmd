@@ -9,6 +9,7 @@ vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
 
 ## Load package
@@ -30,7 +31,7 @@ head(VAFselection)
 The basic functionality of the ```neutralitytestr``` package is achieved by creating a `neutralitytest` object. The `neutralitytest` object contains a range of metrics to test for neutrality, and makes plotting histograms and cumulative distributions to visualize the output easy. The neutralitytest function takes a vector of VAFs and an upper and lower limit for the frequency range over which we wish to test whether the data is consistent with a neutral model, and then calculates all 4 metrics.
 
 ```{r}
-s <- neutralitytest(VAFselection, fmin = 0.05, fmax = 0.4)
+s <- neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25)
 ```
 We can the print a summary of the neutralitytest object for the synthetic data with selection. This prints out all values and associated p-values for all the metrics. The p-values are the p-values under the null model of neutral evolution.
 
@@ -39,7 +40,7 @@ summary(s)
 ```
 And we can do the same for the neutral synthetic data.
 ```{r}
-n <- neutralitytest(VAFneutral,fmin = 0.05, fmax = 0.4)
+n <- neutralitytest(VAFneutral,fmin = 0.1, fmax = 0.25)
 summary(n)
 ```
 

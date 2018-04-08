@@ -12,11 +12,11 @@ lsq_plot <- function(object ) {
   breaks    <- c(u,round((u-v) / 4,2),v)
   breakPos  <- 1 / breaks - 1 / u
   breakLab  <- paste("1/", breaks,sep="")
-  
-  formula <- object$cumulativefrequency$M_f ~ object$cumulativefrequency$inv_f + 0 
+
+  formula <- object$cumulativefrequency$M_f ~ object$cumulativefrequency$inv_f + 0
   # Create the plot:
   p <- ggplot2::ggplot( object$cumulativefrequency, ggplot2::aes( x=inv_f, y=M_f, col = "1") ) +
-    ggplot2::geom_smooth(method = "lm", formula = y ~ x + 0, se=FALSE)   + 
+    ggplot2::geom_smooth(method = "lm", formula = y ~ x + 0, se=FALSE)   +
     ggplot2::geom_point(ggplot2::aes(colour="2")) +
     ggplot2::scale_colour_manual(values = c("firebrick","black"),
                         labels = c("Best fit line", "Data"),
@@ -26,14 +26,15 @@ lsq_plot <- function(object ) {
     ggplot2::ggtitle("Linear model best fit") +
     ggplot2::scale_x_continuous( trans=scales::identity_trans(), breaks=breakPos,
                             labels=breakLab  ) +
-    ggpmisc::stat_poly_eq(ggplot2::aes(label =  paste(..eq.label..)), 
+    ggpmisc::stat_poly_eq(ggplot2::aes(label =  paste(..eq.label..)),
                  formula = formula, parse = TRUE,
                  label.y.npc = 0.8, col = "Black") +
-    ggpmisc::stat_poly_eq(formula = formula, 
+    ggpmisc::stat_poly_eq(formula = formula,
                  parse = TRUE,
                  label.y.npc = 0.9, col = "Black") +
     cowplot::theme_cowplot() +
-    ggplot2::theme(legend.position = c(0.8, 0.15)) 
+    cowplot::background_grid(major = "xy", minor = "none") +
+    ggplot2::theme(legend.position = c(0.5, 0.15))
 
 
   return(p)
@@ -72,11 +73,12 @@ normalized_plot <- function(object){
     ggplot2::xlab( "Inverse allelic frequency 1/f" ) +
     ggplot2::ylab( "Normalized M(f)" ) +
     ggplot2::ggtitle("Normalized cumulative distribution" ) +
-    ggplot2::scale_x_continuous(trans=scales::identity_trans(), 
+    ggplot2::scale_x_continuous(trans=scales::identity_trans(),
                        breaks=breakPos,
                        labels=breakLab) +
     cowplot::theme_cowplot() +
-    ggplot2::theme(legend.position = c(0.8, 0.15)) 
+    cowplot::background_grid(major = "xy", minor = "none") +
+    ggplot2::theme(legend.position = c(0.5, 0.15))
 
   return(p)
 
@@ -88,24 +90,24 @@ vaf_histogram <- function(object){
     ggplot2::geom_histogram(binwidth=0.01) +
     ggplot2::xlab( "Allelic frequency f" ) +
     ggplot2::ylab("Number of \nmutations") +
-    ggplot2::xlim( -0.01, 1.01) +
-    ggplot2::ggtitle("VAF histogram")+
-    cowplot::theme_cowplot()
+    ggplot2::xlim( -0.01, min(round(max(object$VAF), 1) + 0.1, 1.0)) +
+    ggplot2::ggtitle("VAF histogram") +
+    cowplot::background_grid(major = "xy", minor = "none") #+cowplot::theme_cowplot()
 
   return(p)
 }
 
 #' @export
 plot_all <- function(object){
-  
+
   p1 <- vaf_histogram(object)
   p2 <- lsq_plot(object)
   p3 <- normalized_plot(object)
-  
+
   p <- cowplot::plot_grid(p1, p2, p3,
             labels = c("A", "B", "C"), ncol = 3)
-  
+
   return(p)
-  
+
 }
 

@@ -13,11 +13,11 @@ library(neutralitytestr)
 ```
 
 ## Analysis
-The package comes with some preloaded test data, generated from a simulation of tumour growth. These test data sets are called ```VAFselection``` and ```VAFneutral```. We'll demonstrate the functionality of the package with the ``VAFselection`` data.
+The package comes with some preloaded test data, generated from a simulation of tumour growth. These test data sets are called ```VAFselection``` and ```VAFneutral```.
 
 The basic functionality of the ```neutralitytestr``` package is achieved by creating a ```neutralitytest``` object. The ```neutralitytest``` object contains a range of metrics to test for neutrality, and makes plotting histograms and cumulative distributions to visualize the output easy. The ```neutralitytest``` function takes a vector of VAFs and an upper and lower limit for the frequency range over which we wish to test whether the data is consistent with a neutral model, and then calculates all 4 metrics.
 ```R
-out <- neutralitytest(VAFneutral, fmin = 0.05, fmax = 0.4)
+out <- neutralitytest(VAFneutral, fmin = 0.1, fmax = 0.25)
 ```
 
 The neutralitytest object can be summarised using the ```summary(out)``` command.
@@ -25,15 +25,15 @@ The neutralitytest object can be summarised using the ```summary(out)``` command
 Summary of neutrality metrics:
 
 Area:
-  value =  0.001196022 , p-value =  0.988
+  value =  0.03067203 , p-value =  0.679
 Kolmogorov Distance:
-  value =  0.04412539 , p-value =  0.953
+  value =  0.09036603 , p-value =  0.641
 Mean distance:
-  value =  0.01950672 , p-value =  0.906
+  value =  0.04131414 , p-value =  0.595
 R^2:
-  value =  0.9941321 , p-value =  0.585
+  value =  0.98993 , p-value =  0.404
 
-Effective mutation rate =  33.84608
+Effective mutation rate =  216.7985
 ```
 
 
@@ -41,17 +41,22 @@ The following commands will plot a VAF histogram, a least squares model fit and 
 ```R
 vaf_histogram(out)
 ```
-![plot](/figure/unnamed-chunk-7-1.png)
+![plot](/figure/histneutral.png)
 ```R
 lsq_plot(out)
 ```
-![plot](/figure/unnamed-chunk-8-1.png)
+![plot](/figure/lsqneutral.png)
 ```R
 normalized_plot(out)
 ```
-![plot](/figure/unnamed-chunk-9-1.png)
+![plot](/figure/normneutral.png)
 
-
+We can do the same with the VAFselection data:
+```R
+out <- neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25)
+plot_all(out)
+```
+![plot](/figure/allselection.png)
 
 
 Note that the p-values should be interpreted with care and are meant to serve as an approximation to guide the interpretation of the test statistics. These p-values were generated empirically from a simulated cohort of cancers with known ground truth and are derived from the same data that generated the ROC curves in supplementary figure 3 from the paper. This cohort of simulated tumours were "sequenced" to 100X and thus if a sample you are analysing is sequenced to much higher or lower depth the p-values may no longer be valid. We have also developed a Bayesian alternative to identifying neutral and non-neutral tumours, this is available [here](https://github.com/marcjwilliams1/SubClonalSelection.jl). Note that this Bayesian method is much more computationally expensive and can take upwards of 10 hours per sample.
