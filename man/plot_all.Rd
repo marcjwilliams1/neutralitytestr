@@ -3,7 +3,8 @@
 \name{plot_all}
 \alias{plot_all}
 \title{Plot all plots in the package and make composite figure.
-\code{plot_all} Plots histogram, lqs plot and normalized plot and plot all togetger.}
+\code{plot_all} Plots histogram, linear model best fit plot
+and normalized plot and plot and makes composite figure.}
 \usage{
 plot_all(object)
 }
@@ -15,7 +16,8 @@ ggplot object.
 }
 \description{
 Plot all plots in the package and make composite figure.
-\code{plot_all} Plots histogram, lqs plot and normalized plot and plot all togetger.
+\code{plot_all} Plots histogram, linear model best fit plot
+and normalized plot and plot and makes composite figure.
 }
 \examples{
 plot_all(neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25))

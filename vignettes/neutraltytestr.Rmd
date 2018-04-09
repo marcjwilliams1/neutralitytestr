@@ -2,8 +2,8 @@
 title: "neutralitytestr: Testing a neutral evolutionary model on cancer sequencing data "
 author: "Marc Williams"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-#output: pdf_document
+#output: rmarkdown::html_vignette
+output: pdf_document
 fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Vignette Title}

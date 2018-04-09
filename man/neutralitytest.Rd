@@ -17,13 +17,13 @@ numbers should be between 0 and 1}
 \value{
 neutralitytest object which contains test statistics which tests
 if the sequencing data is consistent a neutral evolutionary model.
-Test statistics are area between theoretical and empriical curves, kolmogorov distance, mean distance and R^2 statistics
+Test statistics are area between theoretical and empirical curves, kolmogorov distance, mean distance and R^2 statistics
 from linear model fit. Also returns an estimate of the mutation rate per tumour tumour doubling, the raw VAFs and
 cumulative distribution
 }
 \description{
 \code{neutralitytest} returns a neutralitytest object which contains the result of
-various test statistics to test for neutrality as described in Williams et al Nature Genetics 2018.
+various test statistics to test for neutrality as described in Williams et al. Nature Genetics 2018.
 }
 \examples{
 neutralitytest(runif(100))
