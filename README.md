@@ -49,7 +49,7 @@ lsq_plot(out)
 ```R
 normalized_plot(out)
 ```
-![plot](/figure/normneutral.png)
+![plot](/figure/normneutral.png){:height="50%" width="50%"}
 
 We can do the same with the VAFselection data:
 ```R
@@ -58,5 +58,8 @@ plot_all(out)
 ```
 ![plot](/figure/allselection.png)
 
+<img src="figure/normneutral.png" width="50%">
 
+
+### Notes
 Note that the p-values should be interpreted with care and are meant to serve as an approximation to guide the interpretation of the test statistics. These p-values were generated empirically from a simulated cohort of cancers with known ground truth and are derived from the same data that generated the ROC curves in supplementary figure 3 from the paper. This cohort of simulated tumours were "sequenced" to 100X and thus if a sample you are analysing is sequenced to much higher or lower depth the p-values may no longer be valid. We have also developed a Bayesian alternative to identifying neutral and non-neutral tumours, this is available [here](https://github.com/marcjwilliams1/SubClonalSelection.jl). Note that this Bayesian method is much more computationally expensive and can take upwards of 10 hours per sample.
