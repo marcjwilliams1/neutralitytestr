@@ -1,9 +1,9 @@
 ---
-title: "neutralitytestr.R: Testing a neutral evolutionary model on cancer sequencing data "
+title: "neutralitytestr: Testing a neutral evolutionary model on cancer sequencing data "
 author: "Marc Williams"
 date: "`r Sys.Date()`"
-#output: rmarkdown::html_vignette
-output: pdf_document
+output: rmarkdown::html_vignette
+#output: pdf_document
 fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -14,7 +14,7 @@ vignette: >
 
 ## Load package
 
-After you have installed the package with ```devtools::install_github("marcjwilliams1/neutralitytestr")```, you can load the package via the normal command. This will also load some test data. 
+After you have installed the package, you can load the package via the normal command. This will also load some test data. 
 
 ```{r,message = FALSE,  warning = FALSE}
 library(neutralitytestr)
@@ -25,6 +25,8 @@ The test data files include 2 simulated VAF distributions, one under a neutral e
 ```{r}
 head(VAFselection)
 ```
+
+The test data were generated using an evolutionary model of cancer which produces synthetic sequencing data. The test data here were generated to approximately mimic whole genome sequencing data. There are $\sim 5000$ mutations in both datasets and the data was "sequenced" to 100X. Also included was normal contamination of 20%, that is why we observe the peak at roughly 0.4 ($2 \times 0.4 = 0.8$) which represents the clonal mutations in the sample, that is mutations present in every cancer cell. For both data the effective mutation rate (or equivalently the per tumour doubling mutation rate) is 200 corresponding to a WGS base per rate of $\sim 7 \times 10^{-8}$. For the `VAFneutral` data a neutral model where all cells have the same fitness was used, for the `VAFselection` data there is a single subclone at frequency 0.44 hence the peak at around 0.2 in the VAF spectrum (as will be seen below).
 
 ## `neutralitytest` object
 
@@ -64,11 +66,12 @@ normalized_plot(n)
 ```
 
 Invoking the plot command will plot all 3 plots together, which can be saved to a named output using ggplot.
-```{r, warning = FALSE}
+```{r, warning = FALSE, fig.show='hold',fig.width = 10, fig.height=3, warning = FALSE, fig.align='center'}
 gout <- plot_all(s)
 
 library(ggplot2)
 ggsave(filename = "test.pdf", gout, height = 5, width = 15)
+gout
 ```
 
 ## Summary of neutrality metrics

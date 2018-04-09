@@ -39,7 +39,7 @@ Effective mutation rate =  216.7985
 ```
 
 
-The following commands will plot a VAF histogram, a least squares model fit and the normalized distributions. For more information see the vignette in ```vignettes/```.
+The following commands will plot a VAF histogram, a least squares model fit and the normalized distributions. For more information see the vignette.
 
 ```R
 vaf_histogram(out)
