@@ -1,5 +1,12 @@
+#' Plot cumulative distribution
+#' \code{lsq_plot} Plots the cumulative distribution of the data as well as the best fit linear model line.
+#'
+#' @param object neutrality test object
+#' @return ggplot object.
+#' @examples
+#' lsq_plot(neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25))
 #' @export
-lsq_plot <- function(object ) {
+lsq_plot <- function(object) {
 
   # Set values for u and v based on the input data:
   u <- max( object$cumulativefrequency$f )
@@ -40,6 +47,14 @@ lsq_plot <- function(object ) {
   return(p)
 }
 
+#' Plot normalized cumulative distribution
+#' \code{normalized_plot} Plots the (normalized) cumulative distribution of the data as well as the theoretical expectation from
+#' a neutral evolutionary model.
+#'
+#' @param object neutrality test object
+#' @return ggplot object.
+#' @examples
+#' normalized_plot(neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25))
 #' @export
 normalized_plot <- function(object){
 
@@ -84,6 +99,13 @@ normalized_plot <- function(object){
 
 }
 
+#' Plot VAF histogram
+#' \code{vaf_histogram} Plots a histogram of the variant allele frequencies.
+#'
+#' @param object neutrality test object
+#' @return ggplot object.
+#' @examples
+#' vaf_histogram(neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25))
 #' @export
 vaf_histogram <- function(object){
   p <- ggplot2::ggplot( data.frame(x=object$VAF), ggplot2::aes(x=x) ) +
@@ -92,11 +114,19 @@ vaf_histogram <- function(object){
     ggplot2::ylab("Number of \nmutations") +
     ggplot2::xlim( -0.01, min(round(max(object$VAF), 1) + 0.1, 1.0)) +
     ggplot2::ggtitle("VAF histogram") +
-    cowplot::background_grid(major = "xy", minor = "none") #+cowplot::theme_cowplot()
+    cowplot::theme_cowplot() + cowplot::background_grid(major = "xy", minor = "none")
 
   return(p)
 }
 
+#' Plot all plots in the package and make composite figure.
+#' \code{plot_all} Plots histogram, lqs plot and normalized plot and plot all togetger.
+#'
+#' @param object neutrality test object
+#' @return ggplot object.
+#' @examples
+#' plot_all(neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25))
+#' @export
 #' @export
 plot_all <- function(object){
 
