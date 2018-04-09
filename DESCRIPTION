@@ -1,9 +1,9 @@
 Package: neutralitytestr
 Title: neutralitytestr
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: person("Marc", "Williams", email = "marcjwilliams1@gmail.com", role = c("aut", "cre"))
 Description: Package takes frequencies of mutations as reported by high throughput sequencing data from cancer and fits a linear least squares model derived from a neutral model of tumour evolution. Package output summary statistics and contains code for plotting the data and model fits.
-Depends: R (>= 3.3.1)
+Depends: R (>= 3.4)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -12,12 +12,8 @@ Imports:
     ggplot2,
     scales,
     pracma,
-    MASS,
-    ggExtra,
-    gridExtra,
     ggpmisc,
-    cowplot,
-    grid
+    cowplot
 Suggests: knitr,
     	  rmarkdown,
     testthat

@@ -3,3 +3,4 @@
 ^data-raw$
 ^\.travis\.yml$
 ^figure$
+^cran-comments.md$
