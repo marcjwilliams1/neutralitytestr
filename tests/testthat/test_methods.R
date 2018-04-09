@@ -1,8 +1,8 @@
-test_that("neutralitytest returns correct object"{
+test_that("neutralitytest returns correct object", {
   expect_is(neutralitytest(VAFneutral), "neutralitytest")
 })
 
-test_that("neutrality test identifies neutral and non neutral examples"{
+test_that("neutrality test identifies neutral and non neutral examples", {
   expect_true(neutralitytest(VAFneutral)$rsq$pval > 0.05)
   expect_true(neutralitytest(VAFselection)$rsq$pval < 0.05)
   expect_true(neutralitytest(VAFneutral)$area$metric < neutralitytest(VAFselection)$area$metric)

@@ -44,19 +44,19 @@ neutralitytest <- function(VAF, fmin = 0.12, fmax = 0.24) {
 }
 
 #' @export
-print.neutralitytest <- function(object){
+print.neutralitytest <- function(x, ...){
   cat("Summary of neutrality metrics:","\n\n")
 
-  cat("Area:\n ","value = ", object$area$metric, ", p-value = ", object$area$pval,"\n")
-  cat("Kolmogorov Distance:\n ","value = ", object$Dk$metric, ", p-value = ", object$Dk$pval,"\n")
-  cat("Mean distance:\n ","value = ", object$meanD$metric, ", p-value = ", object$meanD$pval,"\n")
-  cat("R^2:\n ","value = ", object$rsq$metric, ", p-value = ", object$rsq$pval,"\n\n")
+  cat("Area:\n ","value = ", x$area$metric, ", p-value = ", x$area$pval,"\n")
+  cat("Kolmogorov Distance:\n ","value = ", x$Dk$metric, ", p-value = ", x$Dk$pval,"\n")
+  cat("Mean distance:\n ","value = ", x$meanD$metric, ", p-value = ", x$meanD$pval,"\n")
+  cat("R^2:\n ","value = ", x$rsq$metric, ", p-value = ", x$rsq$pval,"\n\n")
 
-  cat("Effective mutation rate = ",object$mutation.rate)
+  cat("Effective mutation rate = ",x$mutation.rate)
 }
 
 #' @export
-summary.neutralitytest <- function(object){
+summary.neutralitytest <- function(object, ...){
   cat("Summary of neutrality metrics:","\n\n")
 
   cat("Area:\n ","value = ", object$area$metric, ", p-value = ", object$area$pval,"\n")
@@ -64,5 +64,5 @@ summary.neutralitytest <- function(object){
   cat("Mean distance:\n ","value = ", object$meanD$metric, ", p-value = ", object$meanD$pval,"\n")
   cat("R^2:\n ","value = ", object$rsq$metric, ", p-value = ", object$rsq$pval,"\n\n")
 
-  cat("Effective mutation rate = ",object$mutation.rate)
+  cat("Effective mutation rate = ", object$mutation.rate)
 }
