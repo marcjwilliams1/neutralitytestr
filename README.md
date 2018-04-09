@@ -41,15 +41,15 @@ The following commands will plot a VAF histogram, a least squares model fit and 
 ```R
 vaf_histogram(out)
 ```
-![plot](/figure/histneutral.png)
+<img src="figure/histneutral.png" width="50%">
 ```R
 lsq_plot(out)
 ```
-![plot](/figure/lsqneutral.png)
+<img src="figure/lsqneutral.png" width="50%">
 ```R
 normalized_plot(out)
 ```
-![plot](/figure/normneutral.png){:height="50%" width="50%"}
+<img src="figure/normneutral.png" width="50%">
 
 We can do the same with the VAFselection data:
 ```R
@@ -57,8 +57,6 @@ out <- neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25)
 plot_all(out)
 ```
 ![plot](/figure/allselection.png)
-
-<img src="figure/normneutral.png" width="50%">
 
 
 ### Notes
