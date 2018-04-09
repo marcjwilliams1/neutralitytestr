@@ -1,5 +1,7 @@
 # neutralitytestr
 
+[![Travis-CI Build Status](https://travis-ci.org/marcjwilliams1/neutralitytestr.svg?branch=master)](https://travis-ci.org/marcjwilliams1/neutralitytestr)
+
 This is an R package to analyse Variant Allele Frequency (VAF) distributions as reported from high throughput cancer sequencing. It reports 4 summary statistics and associated p-values based on a neutral model of tumour evolution, as well as functions to plot the VAF histogram and model fits.
 
 ## Getting Started
