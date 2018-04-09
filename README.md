@@ -38,24 +38,32 @@ Effective mutation rate =  216.7985
 
 
 The following commands will plot a VAF histogram, a least squares model fit and the normalized distributions. For more information see the vignette in ```vignettes/```.
+
 ```R
 vaf_histogram(out)
 ```
+
 <img src="figure/histneutral.png" width="50%">
+
 ```R
 lsq_plot(out)
 ```
+
 <img src="figure/lsqneutral.png" width="50%">
+
 ```R
 normalized_plot(out)
 ```
+
 <img src="figure/normneutral.png" width="50%">
 
 We can do the same with the VAFselection data:
+
 ```R
 out <- neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25)
 plot_all(out)
 ```
+
 ![plot](/figure/allselection.png)
 
 
