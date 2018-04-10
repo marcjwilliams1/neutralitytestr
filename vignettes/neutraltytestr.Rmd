@@ -1,12 +1,12 @@
 ---
-title: "neutralitytestr: Testing a neutral evolutionary model on cancer sequencing data "
+title: "neutralitytestr: Testing a neutral evolutionary model on cancer sequencing data"
 author: "Marc Williams"
 date: "`r Sys.Date()`"
 #output: rmarkdown::html_vignette
 output: pdf_document
 fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{neutralitytestr: Testing a neutral evolutionary model on cancer sequencing data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   \usepackage[utf8]{inputenc}

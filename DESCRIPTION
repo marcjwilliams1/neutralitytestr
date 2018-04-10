@@ -1,8 +1,8 @@
 Package: neutralitytestr
-Title: neutralitytestr
+Title: Test for a neutral evolutionary model in cancer sequencing data
 Version: 0.0.1
 Authors@R: person("Marc", "Williams", email = "marcjwilliams1@gmail.com", role = c("aut", "cre"))
-Description: Package takes frequencies of mutations as reported by high throughput sequencing data from cancer and fits a linear least squares model derived from a neutral model of tumour evolution. Package output summary statistics and contains code for plotting the data and model fits.
+Description: Package takes frequencies of mutations as reported by high throughput sequencing data from cancer and fits theoretical neutral model of tumour evolution. Package outputs summary statistics and contains code for plotting the data and model fits. See Williams et al 2016 doi:10.1038/ng.3489 and Williams et al 2017 doi:10.1101/096305 for further details of the method.
 Depends: R (>= 3.4)
 License: MIT + file LICENSE
 Encoding: UTF-8
