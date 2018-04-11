@@ -1,17 +1,22 @@
 # neutralitytestr
 
 [![Travis-CI Build Status](https://travis-ci.org/marcjwilliams1/neutralitytestr.svg?branch=master)](https://travis-ci.org/marcjwilliams1/neutralitytestr)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/neutralitytestr)](https://cran.r-project.org/package=neutralitytestr)
+![](http://cranlogs.r-pkg.org/badges/grand-total/neutralitytestr)
 
 This is an R package to analyse Variant Allele Frequency (VAF) distributions as reported from high throughput cancer sequencing. It reports 4 summary statistics and associated p-values based on a neutral model of tumour evolution, as well as functions to plot the VAF histogram and model fits.
 
 ## Getting Started
-To download the package you will need the ```devtools``` package. Once this is installed you can then download the ```neutralitytestr``` package with the command:
+You can download the package from [CRAN](https://cran.r-project.org/package=neutralitytestr) in the usual way.
+``` r
+install.packages(neutralitytestr)
+library(neutralitytestr)
+```
+
+
+To download the latest development version you'll need to use the ```devtools``` package:
 ```R
 devtools::install_github("marcjwilliams1/neutralitytestr")
-```
-In your R session you can then start using the package with the usual command
-```R
-library(neutralitytestr)
 ```
 
 ## Analysis
