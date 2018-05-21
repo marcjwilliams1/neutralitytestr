@@ -3,7 +3,7 @@ title: "neutralitytestr: Testing a neutral evolutionary model on cancer sequenci
 author: "Marc Williams"
 date: "`r Sys.Date()`"
 #output: rmarkdown::html_vignette
-output: pdf_document
+output: html_document
 fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{neutralitytestr: Testing a neutral evolutionary model on cancer sequencing data}
@@ -40,9 +40,16 @@ We can the print a summary of the neutralitytest object for the synthetic data w
 ```{r}
 summary(s)
 ```
-And we can do the same for the neutral synthetic data.
+
+Rather than manually inputting the minimum and maximum of the integration range we can also input values for the read depth ($D$), the cellularity (% tumour content, c) of the sample, overdispersion of the sequencing data (rho) and the ploidy ($\pi$). This will calculate the expected standard deviation of the clonal cluster using the following equation:
+$$ SD = \sqrt{\frac{1 + (D-1)\times\rho}{D}}$$
+We expect the mean of the cluster to be at the following frequency:
+$$ M = \frac{c}{\pi}$$
+Then the the maximum of the integration range, fmax will be set to $M - 2\times SD$.
+
+We'll now test the model on some synthetic data from a neutral evolutionary model using by inputting values for the read depth, cellularity, overdispersion parameter rho and ploidy and allowing the limits to be calculated automatically.
 ```{r}
-n <- neutralitytest(VAFneutral,fmin = 0.1, fmax = 0.25)
+n <- neutralitytest(VAFneutral, read_depth = 100.0, cellularity = 0.8, rho = 0.0, ploidy = 2)
 summary(n)
 ```
 

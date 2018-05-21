@@ -4,15 +4,26 @@
 \alias{neutralitytest}
 \title{Testing for neutrality on cancer sequencing data}
 \usage{
-neutralitytest(VAF, fmin = 0.12, fmax = 0.24)
+neutralitytest(VAF, fmin = 0.1, fmax = 0.25, read_depth = NULL, rho = 0,
+  cellularity = 1, ploidy = 2)
 }
 \arguments{
 \item{VAF}{Vector of variant allele frequencies (VAFs) from a deep sequencing experiment,
 numbers should be between 0 and 1}
 
-\item{fmin}{Minimum VAF of integration range, default is 0.12}
+\item{fmin}{Minimum VAF of integration range, default is 0.1}
 
-\item{fmax}{Maximum VAF of integration range, default is 0.24}
+\item{fmax}{Maximum VAF of integration range, default is 0.25}
+
+\item{read_depth}{Read depth of sample, if this is specified it will be used to calculate an approptiate integration range.
+default is NULL in which case the default or inputted fmin and fmax will be used.}
+
+\item{rho}{Overdispersion of sample if known, default is 0.0. Will be used to calculate integration range if read_depth != NULL}
+
+\item{cellularity}{Cellularity of sample, default is 1.0. Will be used to calculate integration range if read_depth != NULL}
+
+\item{ploidy}{Ploidy of the genome, default is 2. Ideally mutations should be filtered for this ploidy before running the test.
+Will be used to calculate integration range if read_depth != NULL}
 }
 \value{
 neutralitytest object which contains test statistics which tests
@@ -28,4 +39,5 @@ various test statistics to test for neutrality as described in Williams et al. N
 \examples{
 neutralitytest(runif(100))
 neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25)
+neutralitytest(VAFneutral, read_depth = 100.0, )
 }

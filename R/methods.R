@@ -5,8 +5,14 @@
 #'
 #' @param VAF Vector of variant allele frequencies (VAFs) from a deep sequencing experiment,
 #' numbers should be between 0 and 1
-#' @param fmin Minimum VAF of integration range, default is 0.12
-#' @param fmax Maximum VAF of integration range, default is 0.24
+#' @param fmin Minimum VAF of integration range, default is 0.1
+#' @param fmax Maximum VAF of integration range, default is 0.25
+#' @param read_depth Read depth of sample, if this is specified it will be used to calculate an approptiate integration range.
+#' default is NULL in which case the default or inputted fmin and fmax will be used.
+#' @param rho Overdispersion of sample if known, default is 0.0. Will be used to calculate integration range if read_depth != NULL
+#' @param cellularity Cellularity of sample, default is 1.0. Will be used to calculate integration range if read_depth != NULL
+#' @param ploidy Ploidy of the genome, default is 2. Ideally mutations should be filtered for this ploidy before running the test.
+#' Will be used to calculate integration range if read_depth != NULL
 #' @return neutralitytest object which contains test statistics which tests
 #' if the sequencing data is consistent a neutral evolutionary model.
 #' Test statistics are area between theoretical and empirical curves, kolmogorov distance, mean distance and R^2 statistics
@@ -15,9 +21,18 @@
 #' @examples
 #' neutralitytest(runif(100))
 #' neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25)
+#' neutralitytest(VAFneutral, read_depth = 100.0, )
 #' @export
-neutralitytest <- function(VAF, fmin = 0.12, fmax = 0.24) {
+neutralitytest <- function(VAF, fmin = 0.1, fmax = 0.25, read_depth = NULL, rho = 0.0, cellularity = 1.0, ploidy = 2) {
 
+  if (!is.null(read_depth)){
+    message("Using inputted read depth to calculate integration range")
+    SD <- sqrt((1 + (read_depth - 1) * rho) / read_depth)
+    clonalpeak <- cellularity / ploidy
+    fmax <- clonalpeak - 2*SD
+    message(paste0(" Standard deviation of clonal peak is calculated to be ", SD, "\n Mean of peak is ", clonalpeak,
+                   ". \n Using integration range - (", fmin, ",",fmax, ")"))
+  }
   cumulativefrequency <- analyse_vaf(VAF, fmin, fmax)
 
   A <- areametric(cumulativefrequency, fmin, fmax)

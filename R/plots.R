@@ -34,7 +34,7 @@ lsq_plot <- function(object) {
     ggplot2::scale_x_continuous( trans=scales::identity_trans(), breaks=breakPos,
                             labels=breakLab  ) +
     ggpmisc::stat_poly_eq(ggplot2::aes(label =  paste(..eq.label..)),
-                 formula = formula, parse = TRUE,
+                 formula = formula, parse = TRUE, eq.with.lhs = "italic(mu/beta)~`=`~",
                  label.y.npc = 0.8, col = "Black") +
     ggpmisc::stat_poly_eq(formula = formula,
                  parse = TRUE,
