@@ -30,6 +30,7 @@ neutralitytest <- function(VAF, fmin = 0.1, fmax = 0.25, read_depth = NULL, rho 
     SD <- sqrt((1 + (read_depth - 1) * rho) / read_depth)
     clonalpeak <- cellularity / ploidy
     fmax <- clonalpeak - 2*SD
+    fmax <- round(fmax, 2)
     message(paste0(" Standard deviation of clonal peak is calculated to be ", SD, "\n Mean of peak is ", clonalpeak,
                    ". \n Using integration range - (", fmin, ",",fmax, ")"))
   }
