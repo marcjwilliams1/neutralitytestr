@@ -52,10 +52,10 @@ lsq_plot(out)
 normalized_plot(out)
 ```
 
-We can do the same with the VAFselection data:
+We can also input the read depth, cellularity, overdispersion rho and ploidy and let the package calculate an appropriate upper integration limit by considering the expected standard deviation of the clonal peak. Using this on the VAFselection data we would do the following:
 
 ```R
-out <- neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25)
+out <- neutralitytest(VAFselection, read_depth = 100.0, cellularity = 0.8, rho = 0.0, ploidy = 2)
 plot_all(out) #this will plot all 3 of the above plots and combine into 1 figure.
 ```
 

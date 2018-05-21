@@ -90,3 +90,11 @@ The other metrics are based on a normalized version of equation (1) which remove
 M(f) = \frac{\frac{1}{f}-\frac{1}{f_{max}}} {\frac{1}{f_{min}} - \frac{1}{f_{max}}}
 \end{equation}
 Theoretically, any dataset can be compared to the curve described by equation (2). We can then calculate the area between the data and this curve, the kolmogorov distance between the two and the mean distance of all points and this curve. For further details on the theoretical background see _Williams, Werner et al. Nat. Gen. 2016._
+
+## Input data
+For the best results we would advise filtering mutations for a specific ploidy, ie only including mutations that fill in diploid regions and attempting to estimate the cellularity. A good heuristic for estimating cellularity is looking at the VAF histogram for mutations in diploid only regions and observing where the mean of the clonal cluster falls. @ times this value gives a good estimate of the cellularity.
+
+## Notes on the p-values
+Note that the p-values should be interpreted with care and are meant to serve as an approximation to guide the interpretation of the test statistics. These p-values were generated empirically from a simulated cohort of cancers with known ground truth and are derived from the same data that generated the ROC curves in supplementary figure 3 from Williams et al BioRxiv. This cohort of simulated tumours were "sequenced" to 100X and thus if a sample you are analysing is sequenced to much higher or lower depth the p-values may no longer be valid. We have also developed a Bayesian alternative to identifying neutral and non-neutral tumours called SubClonalSelection.jl in julia which complements the approach in this package. Note that this Bayesian method is much more computationally expensive and can take upwards of 10 hours per sample.
+
+
