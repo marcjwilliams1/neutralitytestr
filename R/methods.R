@@ -21,7 +21,7 @@
 #' @examples
 #' neutralitytest(runif(100))
 #' neutralitytest(VAFselection, fmin = 0.1, fmax = 0.25)
-#' neutralitytest(VAFneutral, read_depth = 100.0, )
+#' neutralitytest(VAFneutral, read_depth = 100.0, cellularity = 0.8)
 #' @export
 neutralitytest <- function(VAF, fmin = 0.1, fmax = 0.25, read_depth = NULL, rho = 0.0, cellularity = 1.0, ploidy = 2) {
 
