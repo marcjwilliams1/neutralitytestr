@@ -38,7 +38,7 @@ lsq_plot <- function(object) {
                  label.y.npc = 0.8, col = "Black") +
     ggpmisc::stat_poly_eq(formula = formula,
                  parse = TRUE,
-                 label.y.npc = 0.9, col = "Black") +
+                 label.y.npc = 0.9, col = "Black", rr.digits = 3, coef.digits = 3) +
     cowplot::theme_cowplot() +
     cowplot::background_grid(major = "xy", minor = "none") +
     ggplot2::theme(legend.position = c(0.5, 0.15))
