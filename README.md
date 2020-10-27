@@ -1,5 +1,7 @@
 # neutralitytestr
 
+### WARNING: It is recommended that you use [*mobster*](https://github.com/caravagn/mobster) for this type of analysis moving forward
+
 [![Travis-CI Build Status](https://travis-ci.org/marcjwilliams1/neutralitytestr.svg?branch=master)](https://travis-ci.org/marcjwilliams1/neutralitytestr)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/neutralitytestr)](https://cran.r-project.org/package=neutralitytestr)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/neutralitytestr)
