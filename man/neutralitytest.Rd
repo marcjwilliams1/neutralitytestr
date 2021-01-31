@@ -4,8 +4,15 @@
 \alias{neutralitytest}
 \title{Testing for neutrality on cancer sequencing data}
 \usage{
-neutralitytest(VAF, fmin = 0.1, fmax = 0.25, read_depth = NULL, rho = 0,
-  cellularity = 1, ploidy = 2)
+neutralitytest(
+  VAF,
+  fmin = 0.1,
+  fmax = 0.25,
+  read_depth = NULL,
+  rho = 0,
+  cellularity = 1,
+  ploidy = 2
+)
 }
 \arguments{
 \item{VAF}{Vector of variant allele frequencies (VAFs) from a deep sequencing experiment,
@@ -35,6 +42,7 @@ cumulative distribution
 \description{
 \code{neutralitytest} returns a neutralitytest object which contains the result of
 various test statistics to test for neutrality as described in Williams et al. Nature Genetics 2018.
+WARNING: This package has been superseded by MOBSTER, see Caravagna et al. Nature Genetics 2020.
 }
 \examples{
 neutralitytest(runif(100))

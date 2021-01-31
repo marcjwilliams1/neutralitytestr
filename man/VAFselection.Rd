@@ -4,7 +4,9 @@
 \name{VAFselection}
 \alias{VAFselection}
 \title{Synthetic sequencing data generated from a evolutionary based cancer simulation.}
-\format{A vector with variant allele frequencies (VAFs) ranging from 0 to 1}
+\format{
+A vector with variant allele frequencies (VAFs) ranging from 0 to 1
+}
 \source{
 Generated using cancer sequencing simulation \url{https://github.com/marcjwilliams1/CancerSeqSim.jl}
 }

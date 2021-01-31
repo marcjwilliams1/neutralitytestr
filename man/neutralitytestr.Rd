@@ -3,7 +3,6 @@
 \docType{package}
 \name{neutralitytestr}
 \alias{neutralitytestr}
-\alias{neutralitytestr-package}
 \title{\code{neutralitytestr} package}
 \description{
 Package to test a neutral evolutionary model on deep sequencing data.
