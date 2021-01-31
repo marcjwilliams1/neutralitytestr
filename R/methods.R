@@ -9,7 +9,7 @@
 #' numbers should be between 0 and 1
 #' @param fmin Minimum VAF of integration range, default is 0.1
 #' @param fmax Maximum VAF of integration range, default is 0.25
-#' @param read_depth Read depth of sample, if this is specified it will be used to calculate an approptiate integration range.
+#' @param read_depth Read depth of sample, if this is specified it will be used to calculate an appropriate integration range.
 #' default is NULL in which case the default or inputted fmin and fmax will be used.
 #' @param rho Overdispersion of sample if known, default is 0.0. Will be used to calculate integration range if read_depth != NULL
 #' @param cellularity Cellularity of sample, default is 1.0. Will be used to calculate integration range if read_depth != NULL
