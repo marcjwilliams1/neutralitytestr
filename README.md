@@ -61,7 +61,7 @@ out <- neutralitytest(VAFselection, read_depth = 100.0, cellularity = 0.8, rho =
 plot_all(out) #this will plot all 3 of the above plots and combine into 1 figure.
 ```
 
-For a more detailed introduction to the package see this [vignette](https://cran.r-project.org/web/packages/neutralitytestr/vignettes/neutraltytestr.html).
+For a more detailed introduction to the package see this [vignette]( https://CRAN.R-project.org/package=neutralitytestr/vignettes/neutraltytestr.html).
 
 ### Notes
 Note that the p-values should be interpreted with care and are meant to serve as an approximation to guide the interpretation of the test statistics. These p-values were generated empirically from a simulated cohort of cancers with known ground truth and are derived from the same data that generated the ROC curves in supplementary figure 3 from the paper. This cohort of simulated tumours were "sequenced" to 100X and thus if a sample you are analysing is sequenced to much higher or lower depth the p-values may no longer be valid. We have also developed a Bayesian alternative to identifying neutral and non-neutral tumours, this is available [here](https://github.com/marcjwilliams1/SubClonalSelection.jl). Note that this Bayesian method is much more computationally expensive and can take upwards of 10 hours per sample.
